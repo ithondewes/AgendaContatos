@@ -18,7 +18,7 @@ class CreateContatosTable extends Migration
             $table->string('nome', 100);
             $table->string('email', 200)->nullable();
             $table->date('data_nascimento')->nullable();
-            $table->string('imagem_contato', 200)->nullable();
+            $table->string('avatar', 200)->nullable();
             $table->text('nota')->nullable();
             $table->timestamps();
         });
