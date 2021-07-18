@@ -17,13 +17,13 @@ class CreateEnderecosTable extends Migration
             $table->increments('id');
             $table->integer('contato_id')->unsigned();
             $table->foreign('contato_id')->references('id')->on('contatos');
-            $table->char('CEP', 8);
-            $table->string('logradouro', 200);
-            $table->char('numero', 10);
-            $table->string('bairro', 100);
-            $table->string('complemento', 100);
-            $table->string('cidade', 100);
-            $table->string('uf', 50);        
+            $table->char('CEP', 8)->nullable();
+            $table->string('logradouro', 200)->nullable();
+            $table->char('numero', 10)->nullable();
+            $table->string('bairro', 100)->nullable();
+            $table->string('complemento', 100)->nullable();
+            $table->string('cidade', 100)->nullable();
+            $table->string('uf', 50)->nullable();        
             $table->timestamps();
         });
     }
