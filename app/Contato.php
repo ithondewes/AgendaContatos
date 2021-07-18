@@ -27,7 +27,7 @@ class Contato extends Model
 
     // Accessor
     public function getAvatarImageAttribute($value) {
-        return $this->avatar == null ? asset('images/null.png') : asset($this->avatar);
+        return $this->avatar == null ? asset('images/null.jpg') : asset($this->avatar);
     }
     public function getAvatarFilenameAttribute($value) {
         return substr($this->avatar, 30, strlen($this->avatar));
