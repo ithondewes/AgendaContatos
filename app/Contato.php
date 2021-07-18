@@ -19,6 +19,12 @@ class Contato extends Model
     {
         return $this->hasMany(Telefone::class);
     }
+
+    public function grupos()
+    {
+        return $this->belongsToMany(Grupo::class);
+    }
+
 }
 
 
