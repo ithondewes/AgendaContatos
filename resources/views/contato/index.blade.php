@@ -23,6 +23,16 @@
             Contatos
             <a href="{{ url('contatos/add') }}" class="btn btn-primary btn-sm float-right">Novo</a>
         </div>
+
+        <hr>
+
+        <form action="{{ route('contatos.search') }}" method="post" class="form form-inline">
+            @csrf
+            <input type="text" name="filter" placeholder="Filtrar:" class="form-control">
+            <button type="submit" class="btn btn-info">Pesquisar</button>
+        </form>
+
+
         <div class="card-body p-0">
             <div class="table-responsive border-0">
                 <table class="table table-hover" style="margin-bottom: inherit">

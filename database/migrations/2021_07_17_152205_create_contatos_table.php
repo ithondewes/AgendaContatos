@@ -15,6 +15,8 @@ class CreateContatosTable extends Migration
     {
         Schema::create('contatos', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('grupo_id')->unsigned();
+            $table->foreign('grupo_id')->references('id')->on('grupos')->onDelete('cascade');
             $table->string('nome', 100);
             $table->string('email', 200)->nullable();
             $table->date('data_nascimento')->nullable();

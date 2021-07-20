@@ -44,7 +44,7 @@
                             <input type="text" class="form-control{{$errors->has('data_nascimento') ? ' is-invalid':''}}" id="data_nascimento" value="{{ old('data_nascimento') }}" name="data_nascimento" placeholder="00/00/0000">
                             <div class="invalid-feedback">{{ $errors->first('data_nascimento') }}</div>
                         </div>
-                        <div class="group">
+                        <div class="form-group">
                             <label for="nome">Endereco(s)</label><br />
                             <a class="btn btn-primary" href="javascript:void(0)" id="addInput2">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>

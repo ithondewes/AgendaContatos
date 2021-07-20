@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Contato extends Model
 {
     protected $fillable = [
-        'nome', 'email', 'data_nascimento', 'avatar', 'nota'
+        'grupo_id', 'nome', 'email', 'data_nascimento', 'avatar', 'nota'
     ];
 
     public function enderecos()
@@ -22,7 +22,7 @@ class Contato extends Model
 
     public function grupos()
     {
-        return $this->belongsToMany(Grupo::class);
+        return $this->belongsTo(Grupo::class);
     }
 
     // Accessor
@@ -47,6 +47,18 @@ class Contato extends Model
             $path = $value->storeAs($filepath, $filename);
         }
         $this->attributes['avatar'] = str_replace('public', 'storage', $filepath) . $filename;
+    }
+
+    public function search($filter = null) {
+        $results = $this->where(function ($query) use($filter) {
+            if ($filter) {
+                $query->where('nome', 'LIKE', "%{$filter}%");
+            }
+        })//->tosql();
+        ->paginate();
+
+        return $results;
+                        
     }
 
     

@@ -12,6 +12,16 @@ use App\Http\Requests\TelefoneRequest;
 
 class ContatoController extends Controller
 {
+    protected $request;
+    private $repository;
+
+    public function __construct(Request $request, Contato $contato)
+    {
+    $this->request = $request;
+    $this->repository = $contato;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -19,8 +29,8 @@ class ContatoController extends Controller
      */
     public function index()
     {
-        $contatos = Contato::all()->sortBy('nome');
-        return view('contato.index', compact('contatos'));
+        $contatos = Contato::latest()->paginate();
+        return view('contato.index', ['contatos' => $contatos,]);
     }
 
     /**
@@ -97,5 +107,15 @@ class ContatoController extends Controller
     {
         Contato::destroy($id);
         return redirect('contatos');
+    }
+
+    /**
+     * Search Contatos
+     */
+    public function search(Request $request)
+    {
+        $contatos = $this->repository->search($request->filter);
+        $contatos = Contato::latest()->paginate();
+        return view('contato.index', ['contatos' => $contatos]);
     }
 }

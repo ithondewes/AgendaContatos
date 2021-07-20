@@ -12,6 +12,6 @@ class Grupo extends Model
 
     public function contatos()
     {
-        return $this->belongsToMany(Contato::class);
+        return $this->HasMany(Contato::class);
     }
 }
