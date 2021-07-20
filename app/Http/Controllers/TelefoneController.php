@@ -3,14 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Contato;
-use App\Http\Requests\ContatoRequest;
 use App\Telefone;
 use App\Http\Requests\TelefoneRequest;
 
-
-
-class ContatoController extends Controller
+class TelefoneController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +15,7 @@ class ContatoController extends Controller
      */
     public function index()
     {
-        $contatos = Contato::all()->sortBy('nome');
-        return view('contato.index', compact('contatos'));
+        //
     }
 
     /**
@@ -30,7 +25,7 @@ class ContatoController extends Controller
      */
     public function create()
     {
-        return view('contato.create');
+        //
     }
 
     /**
@@ -39,11 +34,9 @@ class ContatoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ContatoRequest $request)
+    public function store(Request $request)
     {
-
-        $contato = Contato::create($request->all());
-        return redirect('contatos');    
+        //
     }
 
     /**
@@ -54,10 +47,7 @@ class ContatoController extends Controller
      */
     public function show($id)
     {
-        $contato = Contato::find($id);
-        $contatoEnderecos = $contato->enderecos();
-        $contatoTelefone = $contato->telefones();
-        return view('contato.show', ['data' => $contato, 'telefones' => $contatoTelefone, 'enderecos' => $contatoEnderecos ]);
+        //
     }
 
     /**
@@ -68,8 +58,7 @@ class ContatoController extends Controller
      */
     public function edit($id)
     {
-        $contato = Contato::find($id);
-        return view('contato.edit', ['data' => $contato]);
+        //
     }
 
     /**
@@ -79,12 +68,9 @@ class ContatoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ContatoRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $contato = Contato::find($id);
-        $contato->fill($request->all());
-        $contato->update();
-        return redirect('contatos');
+        //
     }
 
     /**
@@ -95,7 +81,6 @@ class ContatoController extends Controller
      */
     public function destroy($id)
     {
-        Contato::destroy($id);
-        return redirect('contatos');
+        //
     }
 }
