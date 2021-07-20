@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Mail;
 use Illuminate\Http\Request;
 use App\Contato;
 use App\Http\Requests\ContatoRequest;
 use App\Telefone;
 use App\Http\Requests\TelefoneRequest;
-
+use App\Endereco;
+use App\Http\Requests\EnderecoRequest;
+use App\Mail\NovoContatoMail;
 
 
 class ContatoController extends Controller
@@ -53,7 +56,9 @@ class ContatoController extends Controller
     {
 
         $contato = Contato::create($request->all());
-        return redirect('contatos');    
+        $destinario = auth()->user()->email; //e-mail do usuário logado (autenticado)
+        Mail::to($destinario)->send(new NovoContatoMail($contato));
+        return redirect('contatos'); 
     }
 
     /**
