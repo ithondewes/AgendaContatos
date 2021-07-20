@@ -69,7 +69,7 @@ function validate_delete() {
                         <a href="#" onclick="history.back()" class="btn btn-secondary">Voltar</a>
                         <button type="submit" class="btn btn-danger">Excluir</button>
                         <a href="{{ url('contatos/edit/'.$data->id) }}" class="btn btn-primary">Editar</a>
-                        <a href="{{ url('contatos/detalhes/'.$data->id) }}" class="btn btn-primary">Detelhes do Contato</a>
+                        <a href="{{ url('contatos/detalhe/'.$data->id) }}" class="btn btn-primary">Detalhes do Contato</a>
                     </div>
                 </form>
             </div>

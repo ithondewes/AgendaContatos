@@ -43,7 +43,7 @@ class ContatoController extends Controller
      */
     public function create()
     {
-        return view('contato.create');
+        return view('contato.create', ['grupos' => Grupo::all()]);
     }
 
     /**
@@ -122,5 +122,11 @@ class ContatoController extends Controller
         $contatos = $this->repository->search($request->filter);
         $contatos = Contato::latest()->paginate();
         return view('contato.index', ['contatos' => $contatos]);
+    }
+
+    public function detalhes($id)
+    {
+        $contato = Contato::find($id);
+        return view('contato.detalhe', ['data' => $contato]);
     }
 }

@@ -22,6 +22,7 @@ Route::group(['middleware'=>'auth', 'prefix'=>'contatos'], function() {
     Route::post('/', 'ContatoController@store');
     Route::get('{id}', 'ContatoController@show');
     Route::get('/edit/{id}', 'ContatoController@edit');
+    Route::get('/detalhe/{id}', 'ContatoController@detalhes');
     Route::put('{id}', 'ContatoController@update');
     Route::delete('{id}', 'ContatoController@destroy');
 });
