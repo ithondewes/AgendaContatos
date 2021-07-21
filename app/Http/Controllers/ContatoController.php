@@ -9,6 +9,7 @@ use App\Http\Requests\ContatoRequest;
 use App\Telefone;
 use App\Http\Requests\TelefoneRequest;
 use App\Endereco;
+use App\Grupo;
 use App\Http\Requests\EnderecoRequest;
 use App\Mail\NovoContatoMail;
 
@@ -84,7 +85,7 @@ class ContatoController extends Controller
     public function edit($id)
     {
         $contato = Contato::find($id);
-        return view('contato.edit', ['data' => $contato]);
+        return view('contato.edit', ['data' => $contato, 'grupos' => Grupo::all()]);
     }
 
     /**
@@ -94,7 +95,7 @@ class ContatoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ContatoRequest $request, $id)
+    public function update(ContatoRequest $request, $id, $telefone, $endereco)
     {
         $contato = Contato::find($id);
         $contato->fill($request->all());
@@ -128,5 +129,6 @@ class ContatoController extends Controller
     {
         $contato = Contato::find($id);
         return view('contato.detalhe', ['data' => $contato]);
+
     }
 }

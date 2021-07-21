@@ -32,7 +32,7 @@
                         </div>
                         <div class="form-group">
                             <label for="grupo_id">Grupo</label>
-                            <select class="form-control" name="grupo_id" id="grupo_id" onchange="this.form.submit()">
+                            <select class="form-control" name="grupo_id" id="grupo_id">
                                 @foreach ($grupos as $grupo)
                                     <option value="{{ $grupo->id }}" }} >
                                         {{ $grupo->grupo }}
