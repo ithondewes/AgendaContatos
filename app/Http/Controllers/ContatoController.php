@@ -126,11 +126,11 @@ class ContatoController extends Controller
     public function detalhes($id)
     {   
         $telefone = Telefone::all();
-        $endereco = Telefone::all();
+        $endereco = Endereco::all();
         return view('contato.detalhe', ['telefone' => $telefone, 'endereco' => $endereco]);
     }
 
-    public function detalhesstore(TelefoneRequest $request)
+    public function detalhesstore($request)
     {
         $telefone = Telefone::create($request->all());
         $endereco = Endereco::create($request->all());
