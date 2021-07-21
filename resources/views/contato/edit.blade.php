@@ -6,7 +6,6 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Contato
-                <a href="{{ url('contatos/add') }}" class="btn btn-primary btn-sm float-right">Detalhes Contato</a>
                 </div>
                 <form action="{{ url('contatos/'.$data->id) }}" method="post" enctype="multipart/form-data">
                     <div class="card-body">

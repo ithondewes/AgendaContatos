@@ -6,26 +6,21 @@ use Illuminate\Http\Request;
 use App\Telefone;
 use App\Http\Requests\TelefoneRequest;
 
+
 class TelefoneController extends Controller
 {
+    
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        return view('telefones.create');
     }
 
     /**
@@ -34,9 +29,11 @@ class TelefoneController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TelefoneRequest $request)
     {
-        //
+
+        $telefone = Telefone::create($request->all());
+        return redirect('telefones'); 
     }
 
     /**
@@ -47,7 +44,8 @@ class TelefoneController extends Controller
      */
     public function show($id)
     {
-        //
+        $telefone = Telefone::find($id);
+        return view('telefones.show', ['data' => $telefone]);
     }
 
     /**
@@ -58,7 +56,8 @@ class TelefoneController extends Controller
      */
     public function edit($id)
     {
-        //
+        $telefone = Telefone::find($id);
+        return view('telefones.edit', ['data' => $telefone]);
     }
 
     /**
@@ -68,9 +67,12 @@ class TelefoneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ContatoRequest $request, $id)
     {
-        //
+        $telefone = Telefone::find($id);
+        $telefone->fill($request->all());
+        $telefone->update();
+        return redirect('telefones');
     }
 
     /**
@@ -81,6 +83,8 @@ class TelefoneController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Telefone::destroy($id);
+        return redirect('telefones');
     }
+
 }

@@ -9,8 +9,8 @@ use App\Http\Requests\ContatoRequest;
 use App\Telefone;
 use App\Http\Requests\TelefoneRequest;
 use App\Endereco;
-use App\Grupo;
 use App\Http\Requests\EnderecoRequest;
+use App\Grupo;
 use App\Mail\NovoContatoMail;
 
 
@@ -44,7 +44,7 @@ class ContatoController extends Controller
      */
     public function create()
     {
-        return view('contato.create', ['grupos' => Grupo::all()]);
+        return view('contato.create', ['grupos' => Grupo::all(), 'telefones' => Telefone::all(), 'Enderecos' => Telefone::all()]);
     }
 
     /**
@@ -71,9 +71,7 @@ class ContatoController extends Controller
     public function show($id)
     {
         $contato = Contato::find($id);
-        $contatoEnderecos = $contato->enderecos();
-        $contatoTelefone = $contato->telefones();
-        return view('contato.show', ['data' => $contato, 'telefones' => $contatoTelefone, 'enderecos' => $contatoEnderecos ]);
+        return view('contato.show', ['data' => $contato]);
     }
 
     /**
@@ -95,7 +93,7 @@ class ContatoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ContatoRequest $request, $id, $telefone, $endereco)
+    public function update(ContatoRequest $request, $id)
     {
         $contato = Contato::find($id);
         $contato->fill($request->all());
@@ -125,10 +123,4 @@ class ContatoController extends Controller
         return view('contato.index', ['contatos' => $contatos]);
     }
 
-    public function detalhes($id)
-    {
-        $contato = Contato::find($id);
-        return view('contato.detalhe', ['data' => $contato]);
-
-    }
 }

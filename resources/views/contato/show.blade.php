@@ -40,10 +40,6 @@ function validate_delete() {
                             </div>
                             <div class="col-sm-8">
                                 <div class="form-group">
-                                    <label for="saudacao" class="control-label">Dados de Identificação</label>
-                                    <p class="form-control-static">{{ $data->saudacao }}</p>
-                                </div>
-                                <div class="form-group">
                                     <label for="nome">Nome completo</label>
                                     <p class="form-control-static">{{ $data->nome }}</p>
                                 </div>
@@ -56,20 +52,21 @@ function validate_delete() {
                                     <p class="form-control-static">{{ $data->data_nascimento }}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="nota">Nota</label>
-                                    <p class="form-control-static">{{ $data->nota }}</p>
-                                </div>    
-                                <div class="form-group">
                                     <label for="grupo_id">Grupo</label>
                                     <p class="form-control-static">{{ $data->grupo_id }}</p>
-                                </div>                          
+                                </div> 
+                                <div class="form-group">
+                                    <label for="nota">Nota</label>
+                                    <p class="form-control-static">{{ $data->nota }}</p>
+                                </div>                                                           
                         </div><!-- /.row -->
                     </div>
                     <div class="card-footer text-right">
                         <a href="#" onclick="history.back()" class="btn btn-secondary">Voltar</a>
                         <button type="submit" class="btn btn-danger">Excluir</button>
                         <a href="{{ url('contatos/edit/'.$data->id) }}" class="btn btn-primary">Editar</a>
-                        <a href="{{ url('contatos/detalhe/'.$data->id) }}" class="btn btn-primary">Detalhes do Contato</a>
+                        <a href="{{ url('telefones/'.$telefone->id) }}" class="btn btn-primary">Telefone</a>
+                        <a href="{{ url('enderecos/'.$telefone->id) }}" class="btn btn-primary">Telefone</a>
                     </div>
                 </form>
             </div>

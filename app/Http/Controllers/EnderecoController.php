@@ -3,27 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Contato;
+use App\Http\Requests\ContatoRequest;
+use App\Endereco;
+use App\Http\Requests\EnderecoRequest;
+
 
 class EnderecoController extends Controller
 {
+    
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        return view('enderecos.create');
     }
 
     /**
@@ -32,9 +31,11 @@ class EnderecoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EnderecoRequest $request)
     {
-        //
+
+        $endereco = Endereco::create($request->all());
+        return redirect('enderecos'); 
     }
 
     /**
@@ -45,7 +46,8 @@ class EnderecoController extends Controller
      */
     public function show($id)
     {
-        //
+        $endereco = Endereco::find($id);
+        return view('enderecos.show', ['data' => $endereco]);
     }
 
     /**
@@ -56,7 +58,8 @@ class EnderecoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $endereco = Endereco::find($id);
+        return view('enderecos.edit', ['data' => $endereco]);
     }
 
     /**
@@ -66,9 +69,12 @@ class EnderecoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EnderecoRequest $request, $id)
     {
-        //
+        $endereco = Endereco::find($id);
+        $endereco->fill($request->all());
+        $endereco->update();
+        return redirect('enderecos');
     }
 
     /**
@@ -79,6 +85,8 @@ class EnderecoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Endereco::destroy($id);
+        return redirect('enderecos');
     }
+
 }
