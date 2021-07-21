@@ -51,6 +51,7 @@
                             <label for="nota">Nota</label>
                             <textarea class="form-control" id="nota" name="nota" rows="5">{{ old('nota') }}</textarea>
                         </div>
+                        
                     </div>
                     <div class="card-footer text-right">
                         <a href="#" onclick="history.back()" class="btn btn-secondary">Voltar</a>

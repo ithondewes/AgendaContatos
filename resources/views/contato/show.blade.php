@@ -58,15 +58,22 @@ function validate_delete() {
                                 <div class="form-group">
                                     <label for="nota">Nota</label>
                                     <p class="form-control-static">{{ $data->nota }}</p>
-                                </div>                                                           
+                                </div> 
+                                <div class="form-group">
+                                    <label for="telefone">Telefone</label>
+                                    <p class="form-control-static">{{ $data->telefone }}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="endereco">Endereço</label>
+                                    <p class="form-control-static">{{ $data->endereco }}</p>
+                                </div>                                                                
                         </div><!-- /.row -->
                     </div>
                     <div class="card-footer text-right">
                         <a href="#" onclick="history.back()" class="btn btn-secondary">Voltar</a>
                         <button type="submit" class="btn btn-danger">Excluir</button>
                         <a href="{{ url('contatos/edit/'.$data->id) }}" class="btn btn-primary">Editar</a>
-                        <a href="{{ url('telefones/'.$telefone->id) }}" class="btn btn-primary">Telefone</a>
-                        <a href="{{ url('enderecos/'.$telefone->id) }}" class="btn btn-primary">Telefone</a>
+                        <a href="{{ url('contatos/detalhe/'.$data->id) }}" class="btn btn-primary">Detalhes do Contato</a>
                     </div>
                 </form>
             </div>

@@ -44,7 +44,8 @@ class ContatoController extends Controller
      */
     public function create()
     {
-        return view('contato.create', ['grupos' => Grupo::all(), 'telefones' => Telefone::all(), 'Enderecos' => Telefone::all()]);
+        
+        return view('contato.create', ['grupos' => Grupo::all()]);
     }
 
     /**
@@ -55,7 +56,6 @@ class ContatoController extends Controller
      */
     public function store(ContatoRequest $request)
     {
-
         $contato = Contato::create($request->all());
         $destinario = auth()->user()->email; //e-mail do usuário logado (autenticado)
         Mail::to($destinario)->send(new NovoContatoMail($contato));
@@ -122,5 +122,21 @@ class ContatoController extends Controller
         $contatos = Contato::latest()->paginate();
         return view('contato.index', ['contatos' => $contatos]);
     }
+
+    public function detalhes($id)
+    {   
+        $telefone = Telefone::all();
+        $endereco = Telefone::all();
+        return view('contato.detalhe', ['telefone' => $telefone, 'endereco' => $endereco]);
+    }
+
+    public function detalhesstore(TelefoneRequest $request)
+    {
+        $telefone = Telefone::create($request->all());
+        $endereco = Endereco::create($request->all());
+        return redirect('contatos.detalhe');
+    }
+
+
 
 }
