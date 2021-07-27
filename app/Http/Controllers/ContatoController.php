@@ -36,7 +36,7 @@ class ContatoController extends Controller
     {
         $user_id = auth()->user()->id;
         $contatos = Contato::where('user_id', $user_id)->paginate();
-        return view('contato.index', ['contatos' => $contatos,]);
+        return view('contato.index', ['contatos' => $contatos]);
     }
 
     /**
@@ -76,9 +76,15 @@ class ContatoController extends Controller
      */
     public function show($id)
     {
+        $user_id = auth()->user()->id;
         $contato = Contato::find($id);
-        return view('contato.show', ['data' => $contato]);
+        if($contato->user_id == $user_id) {
+            return view('contato.show', ['data' => $contato]);
+        }
+
+        return view('acesso-negado');
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -88,8 +94,13 @@ class ContatoController extends Controller
      */
     public function edit($id)
     {
+        $user_id = auth()->user()->id;
         $contato = Contato::find($id);
-        return view('contato.edit', ['data' => $contato, 'grupos' => Grupo::all()]);
+        if($contato->user_id == $user_id) {
+            return view('contato.edit', ['data' => $contato, 'grupos' => Grupo::all()]);
+        }
+
+        return view('acesso-negado');
     }
 
     /**
@@ -101,10 +112,14 @@ class ContatoController extends Controller
      */
     public function update(ContatoRequest $request, $id)
     {
+        $user_id = auth()->user()->id;
         $contato = Contato::find($id);
-        $contato->fill($request->all());
-        $contato->update();
-        return redirect('contatos');
+        if($contato->user_id == $user_id) {
+            $contato->update($request->all());
+            return view('contato.show', ['data' => $contato]);
+        }
+
+        return view('acesso-negado');
     }
 
     /**
@@ -115,8 +130,14 @@ class ContatoController extends Controller
      */
     public function destroy($id)
     {
-        Contato::destroy($id);
-        return redirect('contatos');
+        $user_id = auth()->user()->id;
+        $contato = Contato::find($id);
+        if($contato->user_id == $user_id) {
+            $contato->destroy();
+            return view('contato.index', ['contatos' => $contatos]);
+        }
+
+        return view('acesso-negado');
     }
 
     /**
