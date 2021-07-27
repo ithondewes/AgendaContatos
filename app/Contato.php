@@ -7,8 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Contato extends Model
 {
     protected $fillable = [
-        'grupo_id', 'nome', 'email', 'data_nascimento', 'avatar', 'nota'
+        'user_id', 'grupo_id', 'nome', 'email', 'data_nascimento', 'avatar', 'nota'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function enderecos()
     {

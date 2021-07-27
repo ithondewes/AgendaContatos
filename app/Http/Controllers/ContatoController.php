@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Mail;
 use Illuminate\Http\Request;
+use App\User;
 use App\Contato;
 use App\Http\Requests\ContatoRequest;
 use App\Telefone;
@@ -33,7 +34,8 @@ class ContatoController extends Controller
      */
     public function index()
     {
-        $contatos = Contato::latest()->paginate();
+        $user_id = auth()->user()->id;
+        $contatos = Contato::where('user_id', $user_id)->paginate();
         return view('contato.index', ['contatos' => $contatos,]);
     }
 
@@ -56,7 +58,11 @@ class ContatoController extends Controller
      */
     public function store(ContatoRequest $request)
     {
-        $contato = Contato::create($request->all());
+        $dados = $request->all();
+        $dados['user_id'] = auth()->user()->id;
+
+        $contato = Contato::create($dados);
+
         $destinario = auth()->user()->email; //e-mail do usuário logado (autenticado)
         Mail::to($destinario)->send(new NovoContatoMail($contato));
         return redirect('contatos'); 
