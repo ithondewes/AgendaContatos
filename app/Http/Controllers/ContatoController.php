@@ -133,8 +133,8 @@ class ContatoController extends Controller
         $user_id = auth()->user()->id;
         $contato = Contato::find($id);
         if($contato->user_id == $user_id) {
-            $contato->destroy();
-            return view('contato.index', ['contatos' => $contatos]);
+            $contato->delete();
+            return redirect()->route('home');
         }
 
         return view('acesso-negado');
